@@ -1,0 +1,21 @@
+name:                aeson-inflections
+version:             0.1.0.0
+synopsis: Collection of useful functions for aeson instances and stuff
+author:              Author name here
+maintainer:          example@example.com
+copyright:           2020 Author name here
+category:            Web
+build-type:          Simple
+cabal-version:       >=1.10
+
+library
+  hs-source-dirs:      src
+  ghc-options:         -Wall
+  exposed-modules:     Data.Aeson.Inflections
+  build-depends:       base >= 4.7 && < 5
+                     , aeson
+                     , inflections
+                     , lens
+                     , megaparsec
+                     , text
+  default-language:    Haskell2010
