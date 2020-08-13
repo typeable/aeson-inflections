@@ -1,4 +1,13 @@
-module Data.Aeson.Inflections where
+module Data.Aeson.Inflections
+  ( defaultFieldLabelModifier
+  , defaultFieldLabelModifier'
+  , dropPrefix
+  , dropPrefixLower
+  , cutPrefix
+  , toUnderscore
+  , toDashed
+  , toSpaced
+  ) where
 
 import           Control.Lens
 import           Control.Monad
