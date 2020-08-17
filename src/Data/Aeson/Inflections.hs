@@ -3,6 +3,7 @@ module Data.Aeson.Inflections
   , defaultFieldLabelModifier'
   , dropPrefix
   , dropPrefixLower
+  , dropByPrefixLength
   , cutPrefix
   , toUnderscore
   , toDashed
@@ -12,7 +13,8 @@ module Data.Aeson.Inflections
 import           Control.Lens
 import           Control.Monad
 import           Data.Char
-import           Data.Text as T (Text, pack, unpack)
+import           Data.Text (Text)
+import qualified Data.Text as T (length, pack, unpack)
 import           Data.Void
 import qualified Text.Inflections as I
 import           Text.Megaparsec.Error
@@ -29,6 +31,12 @@ defaultFieldLabelModifier' = T.pack . defaultFieldLabelModifier . T.unpack
 -- | Just drops prefix
 dropPrefix :: String -> String
 dropPrefix = dropWhile (not . isUpper)
+
+-- | The same as @Prelude.drop@, but takes a string, instead of a length.
+-- This makes code more explicit (easier to see what exactly we are expecting to
+-- @drop@)
+dropByPrefixLength :: Text -> (String -> String)
+dropByPrefixLength t = drop (T.length t)
 
 -- | Cuts the prefix or throws error if prefix does not match. For TH
 -- modifiers only
