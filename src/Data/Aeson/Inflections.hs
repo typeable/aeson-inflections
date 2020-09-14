@@ -1,6 +1,8 @@
 module Data.Aeson.Inflections
   ( defaultFieldLabelModifier
   , defaultFieldLabelModifier'
+  , deriveDefaultJSON
+  , deriveEnumJSON
   , dropPrefix
   , dropPrefixLower
   , dropByPrefixLength
@@ -12,10 +14,13 @@ module Data.Aeson.Inflections
 
 import           Control.Lens
 import           Control.Monad
+import           Data.Aeson
+import           Data.Aeson.TH
 import           Data.Char
 import           Data.Text (Text)
 import qualified Data.Text as T (length, pack, unpack)
 import           Data.Void
+import           Language.Haskell.TH
 import qualified Text.Inflections as I
 import           Text.Megaparsec.Error
 
@@ -27,6 +32,14 @@ defaultFieldLabelModifier = toUnderscore . dropPrefix
 
 defaultFieldLabelModifier' :: Text -> Text
 defaultFieldLabelModifier' = T.pack . defaultFieldLabelModifier . T.unpack
+
+deriveDefaultJSON :: Name -> Q [Dec]
+deriveDefaultJSON = deriveJSON defaultOptions
+  { fieldLabelModifier = defaultFieldLabelModifier }
+
+deriveEnumJSON :: String -> Name -> Q [Dec]
+deriveEnumJSON prefix = deriveJSON defaultOptions
+  { constructorTagModifier = toUnderscore . cutPrefix prefix }
 
 -- | Just drops prefix
 dropPrefix :: String -> String
