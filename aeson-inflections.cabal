@@ -1,12 +1,12 @@
+cabal-version:       2.4
 name:                aeson-inflections
 version:             0.1.0.0
-synopsis: Collection of useful functions for aeson instances and stuff
+synopsis:            Collection of useful functions for aeson instances and stuff
 author:              Author name here
 maintainer:          example@example.com
-copyright:           2020 Author name here
+license-file:        LICENSE
 category:            Web
 build-type:          Simple
-cabal-version:       >=1.10
 
 library
   hs-source-dirs:      src
