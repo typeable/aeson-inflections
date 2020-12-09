@@ -7,6 +7,7 @@ module Data.Aeson.Inflections
   , dropPrefixLower
   , dropByPrefixLength
   , cutPrefix
+  , cutOptionalPrefix
   , toUnderscore
   , toDashed
   , toSpaced
@@ -17,8 +18,9 @@ import           Control.Monad
 import           Data.Aeson
 import           Data.Aeson.TH
 import           Data.Char
+import           Data.Maybe
 import           Data.Text (Text)
-import qualified Data.Text as T (length, pack, unpack)
+import qualified Data.Text as T
 import           Data.Void
 import           Language.Haskell.TH
 import qualified Text.Inflections as I
@@ -59,6 +61,10 @@ cutPrefix pref s = if pref == take plen s
   else error "Prefix does not match!"
   where
     plen = length pref
+
+-- | Drop prefix if exists
+cutOptionalPrefix :: Text -> Text -> Text
+cutOptionalPrefix prefix txt = fromMaybe txt $ T.stripPrefix prefix txt
 
 -- | Drops prefix and turns first character to lowercase
 dropPrefixLower :: String -> String
