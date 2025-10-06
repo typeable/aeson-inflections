@@ -19,11 +19,11 @@ library
 
   build-depends:
     , aeson
-    , base              >=4.7 && <5
-    , deriving-aeson
+    , base              >=4.12 && <5
+    , deriving-aeson    >=0.2
     , inflections
     , lens
-    , megaparsec
+    , megaparsec        >=7.0
     , template-haskell
     , text
 
